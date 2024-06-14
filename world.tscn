@@ -1,0 +1,68 @@
+[gd_scene load_steps=6 format=3 uid="uid://0l6wbc5ljqlf"]
+
+[ext_resource type="PackedScene" uid="uid://bxajosc1j2iv2" path="res://objects/box_regular.tscn" id="1_cqcym"]
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_kpves"]
+[ext_resource type="PackedScene" uid="uid://c6wsd6a2jt8ok" path="res://objects/box_bouncy.tscn" id="2_7stct"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6crkb"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cjgog"]
+size = Vector2(1152, 70)
+
+[node name="World" type="Node2D"]
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("1_kpves")
+object_templates = Array[PackedScene]([ExtResource("1_cqcym"), ExtResource("2_7stct")])
+
+[node name="Background" type="ColorRect" parent="."]
+offset_left = -19.0
+offset_top = -10.0
+offset_right = 1151.0
+offset_bottom = 663.0
+color = Color(0, 0, 0.2, 1)
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2(600, 178)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("RectangleShape2D_6crkb")
+
+[node name="ColorRect" type="ColorRect" parent="RigidBody2D/CollisionShape2D"]
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+metadata/_edit_use_anchors_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(576, 616)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_cjgog")
+
+[node name="Ground" type="ColorRect" parent="StaticBody2D/CollisionShape2D"]
+offset_left = -576.0
+offset_top = -35.0
+offset_right = 576.0
+offset_bottom = 35.0
+color = Color(0, 0.266667, 0, 1)
+
+[node name="BoxRegular" parent="." instance=ExtResource("1_cqcym")]
+position = Vector2(895, 249)
+
+[node name="BoxRegular2" parent="." instance=ExtResource("1_cqcym")]
+position = Vector2(230, 116)
+
+[node name="BoxRegular3" parent="." instance=ExtResource("1_cqcym")]
+position = Vector2(604, 38)
+
+[node name="BoxBouncy" parent="." instance=ExtResource("2_7stct")]
+position = Vector2(474, 55)
+
+[node name="BoxBouncy2" parent="." instance=ExtResource("2_7stct")]
+position = Vector2(612, 356)
+
+[node name="BoxBouncy3" parent="." instance=ExtResource("2_7stct")]
+position = Vector2(818, 81)
